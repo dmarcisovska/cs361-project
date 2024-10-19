@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./App.css";
 
-function App() {
+const Home = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,72 +13,10 @@ function App() {
   const latestNewsUrl = `https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`;
   const searchNewsUrl = `https://api.currentsapi.services/v1/search?apiKey=${apiKey}&keywords=${query}`;
 
-  const fetchNews = async (url) => {
-    setLoading(true);
-    setError(null);
-    setNoResults(false);
-    setArticles([]);
-
-    try {
-      const response = await axios.get(url);
-      console.log("API Response:", response);
-
-      if (!response.data || !response.data.news) {
-        setNoResults(true); 
-        setArticles([]);
-        console.log("No news array returned from API or response is empty.");
-      } else {
-        const newsData = response.data.news;
-
-   
-        console.log("News Data:", newsData);
-
-        const filteredArticles = newsData.filter(
-          (article) => article.image && article.image !== "None"
-        );
-
-        console.log("Filtered Articles:", filteredArticles);
-
-        setArticles(filteredArticles); 
-
-      
-        if (filteredArticles.length === 0) {
-          setNoResults(true);
-          console.log("No valid articles with images found.");
-        }
-      }
-    } catch (err) {
-      setError("Failed to fetch news articles");
-      console.error("Error fetching news:", err); // Log the error for debugging
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchNews(latestNewsUrl);
-    console.log("noResults:", noResults);
-    console.log("loading:", loading);
-    console.log("error:", error);
-  }, []);
-
-  const searchNews = () => {
-    if (query.trim() !== "") {
-      fetchNews(searchNewsUrl);
-      setVisibleCount(10);
-    }
-  };
-
-  const handleReadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 10);
-  };
-
-  // If loading, show the loading message
-  // if (loading) return <p>Loading news...</p>;
 
   return (
     <>
-      <div>
+       <div>
         <h1>today news</h1>
 
         {noResults && !loading && !error && (
@@ -93,10 +30,10 @@ function App() {
         />
         <button onClick={searchNews}>Search</button>
 
-  
+        {/* Show error if fetching news fails */}
         {error && <p>{error}</p>}
 
-  
+        {/* Show "no results" message if no articles are found */}
         {noResults && !loading && (
           <p>No results found for. Please try another search. TEST</p>
         )}
@@ -124,7 +61,7 @@ function App() {
         )}
       </div>
     </>
-  );
-}
+  )
+};
 
-export default App;
+export default Home;
