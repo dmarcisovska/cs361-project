@@ -68,10 +68,10 @@ const Home = () => {
     <>
       <div className="mt-10">
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
-        home{"  "}
-        <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
+        home
+        <mark className="ml-2 mr-2 px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
           of the
-        </mark>{"  "}
+        </mark>
         latest news
       </h1>
        

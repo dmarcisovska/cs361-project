@@ -68,17 +68,17 @@ const Search = () => {
   return (
     <>
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
-        Search{"  "}
-        <mark className="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
+        search
+        <mark className="ml-2 mr-2 px-2 text-white bg-blue-600 rounded dark:bg-blue-500">
           for the
-        </mark>{"  "}
+        </mark>
         latest news
       </h1>
       <p className="flex justify-center text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-200">
         Use the search bar below to search for a news topic of your choice.
       </p>
 
-      <div className="max-w-md mx-auto mt-12">
+      <div className="max-w-md mx-auto mt-6">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
