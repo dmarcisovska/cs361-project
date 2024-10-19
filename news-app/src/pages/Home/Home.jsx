@@ -6,7 +6,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [visibleCount, setVisibleCount] = useState(9);
-  const [noResults, setNoResults] = useState(false);
+  const [noResults, setNoResults] = useState(false);   
 
   const apiKey = "h2-jm5zd4fi5AM1alIEHvMVVmIUP-I2O_-NSNYiKoolaynfz";
   const latestNewsUrl = `https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`;
@@ -136,6 +136,8 @@ const Home = () => {
         <div>
           
         </div>
+        {loading && <p className="flex justify-center mt-8">Loading news...</p>}
+        {error && <p className="flex justify-center text-red-500 mt-2">{error}</p>}
         {visibleCount < articles.length && (
           <div className="flex justify-center">
           <button
