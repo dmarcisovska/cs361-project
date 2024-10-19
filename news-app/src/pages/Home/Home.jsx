@@ -8,7 +8,7 @@ const Home = () => {
   const [visibleCount, setVisibleCount] = useState(9);
   const [noResults, setNoResults] = useState(false);   
 
-  const apiKey = "h2-jm5zd4fi5AM1alIEHvMVVmIUP-I2O_-NSNYiKoolaynfz";
+  const apiKey = import.meta.env.VITE_NEWS_API_KEY;
   const latestNewsUrl = `https://api.currentsapi.services/v1/latest-news?apiKey=${apiKey}`;
 
   const fetchNews = async (url) => {

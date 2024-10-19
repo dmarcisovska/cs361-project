@@ -6,12 +6,12 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState("");
-  const [visibleCount, setVisibleCount] = useState(10);
+  const [visibleCount, setVisibleCount] = useState(9);
   const [noResults, setNoResults] = useState(false);
   const [searched, setSearched] = useState(false); 
   const [emptyQueryError, setEmptyQueryError] = useState(false); // New state for empty search query error
+  const apiKey = import.meta.env.VITE_NEWS_API_KEY;
 
-  const apiKey = "h2-jm5zd4fi5AM1alIEHvMVVmIUP-I2O_-NSNYiKoolaynfz";
   const searchNewsUrl = `https://api.currentsapi.services/v1/search?apiKey=${apiKey}&keywords=${query}`;
 
   const fetchNews = async (url) => {
@@ -61,12 +61,12 @@ const Search = () => {
     } else {
       setSearched(true); 
       fetchNews(searchNewsUrl);
-      setVisibleCount(10);
+      setVisibleCount(9);
     }
   };
 
   const handleReadMore = () => {
-    setVisibleCount((prevCount) => prevCount + 10);
+    setVisibleCount((prevCount) => prevCount + 9);
   };
 
   return (
@@ -137,7 +137,7 @@ const Search = () => {
         )}
 
         {searched && !noResults && articles.length > 0 && (
-          <div style={{ justifyContent: "center" }}>
+          <div style={{ justifyContent: "center" }} className="mt-12">
             <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
               {articles.slice(0, visibleCount).map((article, index) => (
                 <div
