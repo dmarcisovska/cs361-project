@@ -8,7 +8,8 @@ const Search = () => {
   const [query, setQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(10);
   const [noResults, setNoResults] = useState(false);
-  const [searched, setSearched] = useState(false); // New state to track if a search was made
+  const [searched, setSearched] = useState(false); 
+  const [emptyQueryError, setEmptyQueryError] = useState(false); // New state for empty search query error
 
   const apiKey = "h2-jm5zd4fi5AM1alIEHvMVVmIUP-I2O_-NSNYiKoolaynfz";
   const searchNewsUrl = `https://api.currentsapi.services/v1/search?apiKey=${apiKey}&keywords=${query}`;
@@ -18,6 +19,7 @@ const Search = () => {
     setError(null);
     setNoResults(false);
     setArticles([]);
+    setEmptyQueryError(false);
 
     try {
       const response = await axios.get(url);
@@ -54,8 +56,10 @@ const Search = () => {
   };
 
   const searchNews = () => {
-    if (query.trim() !== "") {
-      setSearched(true); // Mark that a search has been made
+    if (query.trim() === "") {
+      setEmptyQueryError(true); // Set error when no query is entered
+    } else {
+      setSearched(true); 
       fetchNews(searchNewsUrl);
       setVisibleCount(10);
     }
@@ -119,19 +123,22 @@ const Search = () => {
             Search
           </button>
         </div>
+        {emptyQueryError && (
+          <p className="flex justify-center	text-red-500 mt-2">Please enter a search term.</p>
+        )}
       </div>
 
       <div>
-        {loading && <p>Loading news...</p>}
-        {error && <p>{error}</p>}
+        {loading && <p className="flex justify-center mt-8">Loading news...</p>}
+        {error && <p className="flex justify-center text-red-500 mt-2">{error}</p>}
 
         {searched && noResults && !loading && !error && (
-          <p>No results found. Please try another search.</p>
+          <p className="flex justify-center text-red-500 mt-2">No results found. Please try another search.</p>
         )}
 
         {searched && !noResults && articles.length > 0 && (
           <div style={{ justifyContent: "center" }}>
-            <div style={{ display: "flex", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
               {articles.slice(0, visibleCount).map((article, index) => (
                 <div
                   key={index}
