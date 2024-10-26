@@ -11,6 +11,7 @@ const Search = () => {
   const [searched, setSearched] = useState(false); 
   const [emptyQueryError, setEmptyQueryError] = useState(false); // New state for empty search query error
   const apiKey = import.meta.env.VITE_NEWS_API_KEY;
+  // const apiKey = "badKey"
 
   const searchNewsUrl = `https://api.currentsapi.services/v1/search?apiKey=${apiKey}&keywords=${query}`;
 

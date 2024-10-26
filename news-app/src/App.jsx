@@ -18,10 +18,10 @@ function App() {
           <nav className="bg-white border-gray-200 dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
               <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
-                <FontAwesomeIcon icon={faNewspaper} className="h-8 dark:text-white" />
+              <NavLink to="/">   <FontAwesomeIcon icon={faNewspaper} className="h-8 dark:text-white" /> </NavLink>
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   <h1 className="text-4xl font-bold text-gray-900 tracking-tight dark:text-white ml-4">
-                    <span className="text-blue-500">today</span> news
+                  <NavLink to="/"> <span className="text-blue-500">today</span> news </NavLink>
                   </h1>
                 </span>
               </a>
