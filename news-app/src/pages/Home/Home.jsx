@@ -12,7 +12,7 @@ const Home = () => {
   const fetchDate = async () => {
     try {
       const response = await axios.get("http://localhost:4000/api/date"); 
-      setCurrentDate(response.data.date); // Update the state with the received date
+      setCurrentDate(response.data.date);
     } catch (error) {
       console.error("Failed to fetch date:", error);
       setCurrentDate("Unavailable");
