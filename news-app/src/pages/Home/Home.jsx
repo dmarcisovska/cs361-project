@@ -68,7 +68,7 @@ const Home = () => {
       }
     } catch (err) {
       setError("Failed to fetch news articles");
-      console.error("Error fetching news:", err); // Log the error for debugging
+      console.error("Error fetching news:", err);
     } finally {
       setLoading(false);
     }
@@ -89,8 +89,8 @@ const Home = () => {
 
   return (
     <>
-    <p className="flex justify-center mt-4 text-gray-700 dark:text-gray-300">
-  {currentDate ? `Today's Date: ${currentDate}` : "Loading date..."}
+    <p className="flex justify-center mt-4 text-gray-700 dark:text-white">
+  {currentDate ? `${currentDate}` : "Loading date..."}
 </p>
       <div className="mt-10">
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
@@ -129,7 +129,7 @@ const Home = () => {
                         {article.title}
                       </h5>
                     </a>
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-300">
                       {article.description}
                     </p>
                     <a
