@@ -9,6 +9,8 @@ const Home = () => {
   const [noResults, setNoResults] = useState(false);   
   const [currentDate, setCurrentDate] = useState(""); 
   const [time, setTime] = useState("");
+  const [quoteBody, setQuoteBody] = useState("");
+  const [quoteAuthor, setQuoteAuthor] = useState("");
 
   const fetchDate = async () => {
     try {
@@ -29,20 +31,20 @@ const Home = () => {
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:3002");
   
-    ws.onopen = () => {
-      console.log("WebSocket connection opened.");
-    };
-  
-    ws.onerror = (error) => {
-      console.error("WebSocket error:", error);
-    };
-  
     ws.onmessage = (event) => {
-      setTime(event.data);
-      console.log("Received time:", event.data);
+      const data = JSON.parse(event.data);
+      if (data.type === "current_time") {
+        setTime(data.content);
+      } else if (data.type === "quote_body") {
+        setQuoteBody(data.content);
+      } else if (data.type === "quote_author") {
+        setQuoteAuthor(data.content);
+      }
     };
   
-    return () => ws.close();
+    return () => {
+      ws.close();
+    };
   }, []);
 
 
@@ -109,9 +111,10 @@ const Home = () => {
 
   return (
     <>
-    <p className="flex justify-center mt-4 text-gray-700 dark:text-white">
-  {currentDate ? `${currentDate}    ` : "Loading date..."} {time ? `${time}` : "Loading time..."}
-</p>
+   
+<h1 className="text-xl italic text-gray-900 dark:text-white text-center mt-4">
+  {quoteBody ? `${quoteBody} -  ${quoteAuthor}` : "Loading quote..."}
+</h1>
       <div className="mt-10">
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
         home
@@ -120,6 +123,11 @@ const Home = () => {
         </mark>
         latest news
       </h1>
+      <p className="flex justify-center mt-4 text-gray-700 dark:text-white">
+  {currentDate ? `${currentDate}` : "Loading date..."}&nbsp;&nbsp;&nbsp;{time ? `${time}` : "Loading time..."}
+</p>
+
+
        
         {!noResults && (
           <div style={{ justifyContent: "center" }}>
