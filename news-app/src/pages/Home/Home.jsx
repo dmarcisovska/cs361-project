@@ -11,12 +11,14 @@ const Home = () => {
 
   const fetchDate = async () => {
     try {
-      await axios.get("http://localhost:4000/api/date"); 
+      const response = await axios.get("http://localhost:4000/api/date"); 
+      setCurrentDate(response.data.date); // Update the state with the received date
     } catch (error) {
       console.error("Failed to fetch date:", error);
       setCurrentDate("Unavailable");
     }
   };
+  
 
   useEffect(() => {
     fetchNews(latestNewsUrl);
