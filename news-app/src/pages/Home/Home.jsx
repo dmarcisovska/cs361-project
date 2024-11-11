@@ -26,17 +26,6 @@ const Home = () => {
     fetchDate();
   }, []);
 
-  // useEffect(() => {
-  //   const ws = new WebSocket("ws://localhost:3002");
-
-  //   ws.onmessage = (event) => {
-  //     setTime(event.data);
-  //     console.log(time)
-  //   };
-
-  //   return () => ws.close();
-  // }, []);
-
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:3002");
   
@@ -121,7 +110,7 @@ const Home = () => {
   return (
     <>
     <p className="flex justify-center mt-4 text-gray-700 dark:text-white">
-  {currentDate ? `${currentDate}` : "Loading date..."} {time ? `${time}` : "Loading time..."}
+  {currentDate ? `${currentDate}    ` : "Loading date..."} {time ? `${time}` : "Loading time..."}
 </p>
       <div className="mt-10">
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
