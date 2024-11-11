@@ -7,6 +7,21 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [visibleCount, setVisibleCount] = useState(9);
   const [noResults, setNoResults] = useState(false);   
+  const [currentDate, setCurrentDate] = useState(""); 
+
+  const fetchDate = async () => {
+    try {
+      await axios.get("http://localhost:4000/api/date"); 
+    } catch (error) {
+      console.error("Failed to fetch date:", error);
+      setCurrentDate("Unavailable");
+    }
+  };
+
+  useEffect(() => {
+    fetchNews(latestNewsUrl);
+    fetchDate();
+  }, []);
 
 
 
@@ -72,6 +87,9 @@ const Home = () => {
 
   return (
     <>
+    <p className="flex justify-center mt-4 text-gray-700 dark:text-gray-300">
+  {currentDate ? `Today's Date: ${currentDate}` : "Loading date..."}
+</p>
       <div className="mt-10">
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
         home
