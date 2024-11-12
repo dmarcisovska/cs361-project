@@ -10,7 +10,27 @@ import Search from "./pages/Search/Search";
 
 import { NavLink } from 'react-router-dom';
 
+
+
 function App() {
+
+  const [temp, getTemp] = useState("");
+
+  useEffect(() => {
+    const ws = new WebSocket("ws://localhost:3002");
+  
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "weather") {
+        getTemp(data.content);
+      } 
+    };
+  
+    return () => {
+      ws.close();
+    };
+  }, []);
+
   return (
     <>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-black dark:text-white">
@@ -64,7 +84,7 @@ function App() {
                     </NavLink>
                   </li>
                   <li>
-                  72C
+                  {temp ? `${temp}` : "Loading temp..."}
                   </li>
                 </ul>
               </div>
