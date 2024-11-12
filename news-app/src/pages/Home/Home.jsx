@@ -112,9 +112,9 @@ const Home = () => {
   return (
     <>
    
-<h1 className="text-xl italic text-gray-900 dark:text-white text-center mt-4">
+<p className="italic text-gray-900 dark:text-white text-center mt-8 px-8">
   {quoteBody ? `${quoteBody} -  ${quoteAuthor}` : "Loading quote..."}
-</h1>
+</p>
       <div className="mt-10">
       <h1 className="flex justify-center mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white mt-12">
         home
