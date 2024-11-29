@@ -125,10 +125,7 @@ const Home = () => {
       </h1>
       <p className="flex justify-center mt-4 text-gray-700 dark:text-white">
   {currentDate ? `${currentDate}` : "Loading date..."}&nbsp;&nbsp;&nbsp;{time ? `${time}` : "Loading time..."}
-</p>
-
-
-       
+</p>       
         {!noResults && (
           <div style={{ justifyContent: "center" }}>
             <div
@@ -198,6 +195,7 @@ const Home = () => {
             onClick={handleReadMore}
             type="button"
             className="mb-12 mt-12 px-5 py-3 text-base font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            title="This may take a few seconds to load more articles"
           >
             Load More Articles
           </button>

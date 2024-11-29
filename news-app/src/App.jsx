@@ -15,6 +15,15 @@ import { NavLink } from 'react-router-dom';
 function App() {
 
   const [temp, getTemp] = useState("");
+  const [showLocationAlert, setShowLocationAlert] = useState(true);
+
+  const handleAllowLocation = () => {
+    setShowLocationAlert(false);
+  };
+
+  useEffect(() => {
+    setShowLocationAlert(true);
+  }, []);
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:3002");
@@ -33,6 +42,20 @@ function App() {
 
   return (
     <>
+     {showLocationAlert && (
+        <div className="alert bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative flex items-center justify-between" role="alert">
+          <span className="block sm:inline">
+            We use your location to display the current temperature in your area. Your location data is not stored or shared. We use your system settings to display this page in either light or dark mode. Your system settings data is not shared. Please exit the page if you do not want to use these features.
+          </span>
+          <div className="ml-4">
+            <button onClick={handleAllowLocation} className="mr-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">
+              Close
+            </button>
+           
+          </div>
+        </div>
+      )}
+
       <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-black dark:text-white">
         <Router>
           <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -84,7 +107,7 @@ function App() {
                     </NavLink>
                   </li>
                   <li>
-                  {temp ? `${temp}` : "Loading temp..."}
+                  {temp ? `${temp}` : ""}
                   </li>
                 </ul>
               </div>
